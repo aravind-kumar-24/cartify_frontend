@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing: border-box;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.input-error {
+    border: 1.5px solid #e53e3e !important;
+    outline-color: #e53e3e;
+}
+
+.error-msg {
+    color: #e53e3e;
+    font-size: 0.75rem;
+    margin-top: 4px;
+    display: block;
+}
