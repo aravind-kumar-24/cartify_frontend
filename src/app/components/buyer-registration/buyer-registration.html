@@ -1,0 +1,217 @@
+<div class="buyer-registration-container">
+    <div class="side-panel">
+        <div class="app-name">
+            {{appName}}
+        </div>
+        <div class="about">
+            <div>
+                Free to join, always
+            </div>
+            <div>
+                Real-time Order tracking & wishlist
+            </div>
+            <div>
+                Exclusive member deals
+            </div>
+            <div>
+                Secure Razorpay checkout
+            </div>
+        </div>
+        <hr>
+        <div class="active-buyers">
+            <div>
+                Active Buyers
+            </div>
+            <div>
+                {{activeBuyers}}
+            </div>
+            <div>
+                across Tamil Nadu
+            </div>
+        </div>
+    </div>
+    <div class="buyer-registration-form">
+        <div class="form-card">
+            <div class="top-section">
+                <div class="title">
+                    Buyer Registration
+                </div>
+                <div class="form-headline">
+                    Create Your Account
+                </div>
+                <div class="existing-user">
+                    Already have an Account? 
+                    <span routerLink="/auth/login">
+                        Sign in...
+                    </span>
+                </div>
+            </div>
+            <form class="registration-form" [formGroup]="buyerFormBuilder" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first_name">First Name *</label>
+                        <input 
+                            type="text" 
+                            formControlName="first_name" 
+                            id="first_name" 
+                            placeholder="Enter your First Name"
+                            [class.input-error]="buyerFormBuilder.get('first_name')?.invalid && buyerFormBuilder.get('first_name')?.touched"
+                            (keydown)="blockSpace($event, 'first_name')"
+                            (input)="restrictionsOnInput('first_name')"
+                        />
+                        @if(buyerFormBuilder.get('first_name')?.invalid && buyerFormBuilder.get('first_name')?.touched){
+                            <span class="error-msg">
+                                First Name is required
+                            </span>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name *</label>
+                        <input 
+                            type="text" 
+                            formControlName="last_name" 
+                            id="last_name" 
+                            placeholder="Enter your Last Name"
+                            [class.input-error]="buyerFormBuilder.get('last_name')?.invalid && buyerFormBuilder.get('last_name')?.touched"
+                            (keydown)="blockSpace($event, 'last_name')"
+                            (input)="restrictionsOnInput('last_name')"
+                        />
+                        @if(buyerFormBuilder.get('last_name')?.invalid && buyerFormBuilder.get('last_name')?.touched){
+                            <span class="error-msg">
+                                Last Name is required
+                            </span>
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email_id">Email Address *</label>
+                    <input 
+                        type="email" 
+                        formControlName="email_id" 
+                        id="email_id" 
+                        placeholder="Enter your Email Address"
+                        [class.input-error]="buyerFormBuilder.get('email_id')?.invalid && buyerFormBuilder.get('email_id')?.touched"
+                        (keydown)="blockSpace($event, 'email_id')"
+                        (input)="restrictionsOnInput('email_id')"
+                    />
+                    @if(buyerFormBuilder.get('email_id')?.invalid && buyerFormBuilder.get('email_id')?.touched){
+                        @if(buyerFormBuilder.get('email_id')?.hasError('required')){
+                            <span class="error-msg">
+                                Email Address is required
+                            </span>
+                        }
+                        @else if (buyerFormBuilder.get('email_id')?.hasError('email')) {
+                            <span class="error-msg">
+                                Invalid Email Format
+                            </span>
+                        }
+                    }
+                </div>
+                <div class="form-group">
+                    <label for="mobile_number">Mobile Number *</label>
+                    <input 
+                        type="text" 
+                        formControlName="mobile_number" 
+                        maxlength="10"
+                        id="mobile_number" 
+                        placeholder="Enter your Mobile Number"
+                        [class.input-error]="buyerFormBuilder.get('mobile_number')?.invalid && buyerFormBuilder.get('mobile_number')?.touched"
+                        (keydown)="blockSpace($event, 'mobile_number')"
+                        (input)="restrictionsOnInput('mobile_number')"
+                    />
+                    @if(buyerFormBuilder.get('mobile_number')?.invalid && buyerFormBuilder.get('mobile_number')?.touched){
+                        @if(buyerFormBuilder.get('mobile_number')?.hasError('required')){
+                            <span class="error-msg">
+                                Mobile Number is required
+                            </span>
+                        }
+                        @else if (buyerFormBuilder.get('mobile_number')?.hasError('pattern')) {
+                            <span class="error-msg">
+                                Invalid Mobile Number
+                            </span>
+                        }
+                    }
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <input 
+                            type="password" 
+                            formControlName="password" 
+                            id="password" 
+                            placeholder="Enter your Password"
+                            [class.input-error]="buyerFormBuilder.get('password')?.invalid && buyerFormBuilder.get('password')?.touched"
+                            (keydown)="blockSpace($event, 'password')"
+                            (input)="restrictionsOnInput('password')"
+                        />
+                        @if(buyerFormBuilder.get('password')?.invalid && buyerFormBuilder.get('password')?.touched){
+                            @if(buyerFormBuilder.get('password')?.hasError('required')){
+                                <span class="error-msg">
+                                    Password is required
+                                </span>
+                            }
+                            @else if (buyerFormBuilder.get('password')?.hasError('minlength')) {
+                                <span class="error-msg">
+                                    Password must be atleast 10 characters long.
+                                </span>
+                            }
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password *</label>
+                        <input 
+                            type="password" 
+                            formControlName="confirm_password" 
+                            id="confirm_password" 
+                            placeholder="Re-enter your Password"
+                            [class.input-error]="buyerFormBuilder.get('confirm_password')?.touched && (buyerFormBuilder.get('confirm_password')?.invalid || buyerFormBuilder.hasError('passwordMismatch'))"
+                            (keydown)="blockSpace($event, 'confirm_password')"
+                            (input)="restrictionsOnInput('confirm_password')"
+                        />
+                        @if(buyerFormBuilder.get('confirm_password')?.touched){
+                            @if(buyerFormBuilder.get('confirm_password')?.invalid && buyerFormBuilder.get('confirm_password')?.hasError('required')){
+                                <span class="error-msg">
+                                    Confirm Password is required
+                                </span>
+                            }
+                            @else if (buyerFormBuilder.hasError('passwordMismatch')) {
+                                <span class="error-msg">
+                                    Passwords do not match.
+                                </span>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="form-check">
+                    <div class="checkbox-row">
+                        <input type="checkbox" id="terms_and_conditions" formControlName="terms_and_conditions">
+                        <label for="terms_and_conditions"> 
+                            I agree to the
+                            <span>Terms of Service</span> 
+                            and
+                            <span>Privacy Policy</span>
+                        </label>
+                    </div>
+                    @if(buyerFormBuilder.get('terms_and_conditions')?.invalid && buyerFormBuilder.get('terms_and_conditions')?.touched){
+                        <span class="error-msg">
+                            You must accept the terms to continue
+                        </span>
+                    }
+                </div>
+                <button type="submit" class="btn-submit">Create Account</button>
+                <div class="divider-or">or</div>
+                <button type="button" class="btn-google">
+                    Continue with Google
+                </button>
+            </form>
+            <div class="botton-section">
+                <div class="seller-panel">
+                    Want to became a Seller? 
+                    <span routerLink="/auth/register-seller">
+                        Click here...
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
