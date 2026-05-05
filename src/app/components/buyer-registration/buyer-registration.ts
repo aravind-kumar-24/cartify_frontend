@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegistrationService } from '../../services/Registration/registration-service';
 
 @Component({
     selector: 'app-buyer-registration',
-    imports: [MatIconModule, RouterLink, FormsModule, ReactiveFormsModule],
+    imports: [MatIconModule, RouterLink, FormsModule, ReactiveFormsModule, MatSnackBarModule],
     templateUrl: './buyer-registration.html',
     styleUrl: './buyer-registration.css',
 })
@@ -20,7 +21,8 @@ export class BuyerRegistration implements OnInit {
 
     constructor(
         private formBuilder : FormBuilder,
-        private registrationService : RegistrationService
+        private registrationService : RegistrationService,
+        private snackBar : MatSnackBar
     ){
 
     }
@@ -83,6 +85,15 @@ export class BuyerRegistration implements OnInit {
         input.setValue(value, {emitEvent:false});
     }
 
+    showToast(message: string, type: 'success' | 'error') {
+        this.snackBar.open(message, 'Close', {
+            duration: 4000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: type === 'success' ? ['snack-success'] : ['snack-error']
+        });
+    }
+
     onSubmit(){
 
         if(this.buyerFormBuilder.invalid){
@@ -97,14 +108,18 @@ export class BuyerRegistration implements OnInit {
             formData.append(key, value as string);
         })
 
-        this.registrationService.registerBuyer(formData).subscribe(
-            (response) => {
-
+        this.registrationService.registerBuyer(formData).subscribe({
+            next : (response) => {
+                console.log(response);
+                this.showToast(response.message, 'success');
+                this.buyerFormBuilder.reset()
             },
-            (error)=>{
-                
+            error : (error) => {
+                console.log(error);
+                const message = error?.error?.message || 'Something went wrong!';
+                this.showToast(message, 'error');
             }
-        )
+        })
 
 
     }

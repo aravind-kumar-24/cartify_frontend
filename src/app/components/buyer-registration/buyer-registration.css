@@ -384,3 +384,18 @@
         font-size: 22px;
     }
 }
+
+.snack-success {
+    background-color: #4caf50 !important;
+    color: white !important;
+}
+
+.snack-error {
+    background-color: #f44336 !important;
+    color: white !important;
+}
+
+.snack-success .mat-mdc-button,
+.snack-error .mat-mdc-button {
+    color: white !important;
+}
