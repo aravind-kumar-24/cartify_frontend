@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegistrationService } from '../../services/Registration/registration-service';
+import { ToasterService } from '../../services/Toaster/toaster-service';
 
 @Component({
     selector: 'app-buyer-registration',
-    imports: [MatIconModule, RouterLink, FormsModule, ReactiveFormsModule, MatSnackBarModule],
+    imports: [MatIconModule, RouterLink, FormsModule, ReactiveFormsModule],
     templateUrl: './buyer-registration.html',
     styleUrl: './buyer-registration.css',
 })
@@ -16,13 +16,14 @@ export class BuyerRegistration implements OnInit {
 
     appName : string = '';
     activeBuyers : number = 0;
-
     buyerFormBuilder !: FormGroup;
+    showPassword : boolean = false;
+    showConfirmPassword : boolean = false;
 
     constructor(
         private formBuilder : FormBuilder,
         private registrationService : RegistrationService,
-        private snackBar : MatSnackBar
+        private toaster : ToasterService
     ){
 
     }
@@ -85,13 +86,12 @@ export class BuyerRegistration implements OnInit {
         input.setValue(value, {emitEvent:false});
     }
 
-    showToast(message: string, type: 'success' | 'error') {
-        this.snackBar.open(message, 'Close', {
-            duration: 4000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-            panelClass: type === 'success' ? ['snack-success'] : ['snack-error']
-        });
+    togglePassword(){
+        this.showPassword = !this.showPassword;
+    }
+
+    toggleConfirmPassword(){
+        this.showConfirmPassword = !this.showConfirmPassword;
     }
 
     onSubmit(){
@@ -111,16 +111,15 @@ export class BuyerRegistration implements OnInit {
         this.registrationService.registerBuyer(formData).subscribe({
             next : (response) => {
                 console.log(response);
-                this.showToast(response.message, 'success');
+                this.toaster.success(response.message);
                 this.buyerFormBuilder.reset()
             },
             error : (error) => {
                 console.log(error);
                 const message = error?.error?.message || 'Something went wrong!';
-                this.showToast(message, 'error');
+                this.toaster.error(message);
             }
         })
-
 
     }
 }
