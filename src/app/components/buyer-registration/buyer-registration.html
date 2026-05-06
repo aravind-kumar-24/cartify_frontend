@@ -58,6 +58,8 @@
                             [class.input-error]="buyerFormBuilder.get('first_name')?.invalid && buyerFormBuilder.get('first_name')?.touched"
                             (keydown)="blockSpace($event, 'first_name')"
                             (input)="restrictionsOnInput('first_name')"
+                            maxlength="25"
+                            autocomplete="off"
                         />
                         @if(buyerFormBuilder.get('first_name')?.invalid && buyerFormBuilder.get('first_name')?.touched){
                             <span class="error-msg">
@@ -75,6 +77,8 @@
                             [class.input-error]="buyerFormBuilder.get('last_name')?.invalid && buyerFormBuilder.get('last_name')?.touched"
                             (keydown)="blockSpace($event, 'last_name')"
                             (input)="restrictionsOnInput('last_name')"
+                            maxlength="25"
+                            autocomplete="off"
                         />
                         @if(buyerFormBuilder.get('last_name')?.invalid && buyerFormBuilder.get('last_name')?.touched){
                             <span class="error-msg">
@@ -93,6 +97,7 @@
                         [class.input-error]="buyerFormBuilder.get('email_id')?.invalid && buyerFormBuilder.get('email_id')?.touched"
                         (keydown)="blockSpace($event, 'email_id')"
                         (input)="restrictionsOnInput('email_id')"
+                        autocomplete="off"
                     />
                     @if(buyerFormBuilder.get('email_id')?.invalid && buyerFormBuilder.get('email_id')?.touched){
                         @if(buyerFormBuilder.get('email_id')?.hasError('required')){
@@ -118,6 +123,7 @@
                         [class.input-error]="buyerFormBuilder.get('mobile_number')?.invalid && buyerFormBuilder.get('mobile_number')?.touched"
                         (keydown)="blockSpace($event, 'mobile_number')"
                         (input)="restrictionsOnInput('mobile_number')"
+                        autocomplete="off"
                     />
                     @if(buyerFormBuilder.get('mobile_number')?.invalid && buyerFormBuilder.get('mobile_number')?.touched){
                         @if(buyerFormBuilder.get('mobile_number')?.hasError('required')){
@@ -135,15 +141,20 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="password">Password *</label>
-                        <input 
-                            type="password" 
-                            formControlName="password" 
-                            id="password" 
-                            placeholder="Enter your Password"
-                            [class.input-error]="buyerFormBuilder.get('password')?.invalid && buyerFormBuilder.get('password')?.touched"
-                            (keydown)="blockSpace($event, 'password')"
-                            (input)="restrictionsOnInput('password')"
-                        />
+                        <div class="input-wrapper">
+                            <input 
+                                [type]="showPassword ? 'text' : 'password'" 
+                                formControlName="password" 
+                                id="password" 
+                                placeholder="Enter your Password"
+                                [class.input-error]="buyerFormBuilder.get('password')?.invalid && buyerFormBuilder.get('password')?.touched"
+                                (keydown)="blockSpace($event, 'password')"
+                                (input)="restrictionsOnInput('password')"
+                            />
+                            <button type="button" class="eye-btn" (click)="togglePassword()">
+                                <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                            </button>
+                        </div>
                         @if(buyerFormBuilder.get('password')?.invalid && buyerFormBuilder.get('password')?.touched){
                             @if(buyerFormBuilder.get('password')?.hasError('required')){
                                 <span class="error-msg">
@@ -159,15 +170,20 @@
                     </div>
                     <div class="form-group">
                         <label for="confirm_password">Confirm Password *</label>
-                        <input 
-                            type="password" 
-                            formControlName="confirm_password" 
-                            id="confirm_password" 
-                            placeholder="Re-enter your Password"
-                            [class.input-error]="buyerFormBuilder.get('confirm_password')?.touched && (buyerFormBuilder.get('confirm_password')?.invalid || buyerFormBuilder.hasError('passwordMismatch'))"
-                            (keydown)="blockSpace($event, 'confirm_password')"
-                            (input)="restrictionsOnInput('confirm_password')"
-                        />
+                        <div class="input-wrapper">
+                            <input 
+                                [type]="showConfirmPassword ? 'text' : 'password'" 
+                                formControlName="confirm_password" 
+                                id="confirm_password" 
+                                placeholder="Re-enter your Password"
+                                [class.input-error]="buyerFormBuilder.get('confirm_password')?.touched && (buyerFormBuilder.get('confirm_password')?.invalid || buyerFormBuilder.hasError('passwordMismatch'))"
+                                (keydown)="blockSpace($event, 'confirm_password')"
+                                (input)="restrictionsOnInput('confirm_password')"
+                            />
+                            <button type="button" class="eye-btn" (click)="toggleConfirmPassword()">
+                                <mat-icon>{{ showConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                            </button>
+                        </div>
                         @if(buyerFormBuilder.get('confirm_password')?.touched){
                             @if(buyerFormBuilder.get('confirm_password')?.invalid && buyerFormBuilder.get('confirm_password')?.hasError('required')){
                                 <span class="error-msg">
@@ -199,10 +215,6 @@
                     }
                 </div>
                 <button type="submit" class="btn-submit">Create Account</button>
-                <div class="divider-or">or</div>
-                <button type="button" class="btn-google">
-                    Continue with Google
-                </button>
             </form>
             <div class="botton-section">
                 <div class="seller-panel">

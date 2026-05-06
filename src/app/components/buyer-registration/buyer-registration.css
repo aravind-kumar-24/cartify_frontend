@@ -1,9 +1,16 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 .buyer-registration-container {
-    display: flex;
-    padding: 20px;
-    width: 80%;
-    margin: auto;
-    box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  width: 70%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .side-panel {
@@ -87,7 +94,7 @@
     border-radius: 0 20px 20px 0;
     border-left: 0.5px solid #e2e0db;
     display: flex;
-    align-items: center;       
+    align-items: center;
     justify-content: center;  
     padding: 35px 40px;  
     box-shadow: 4px 0 32px rgba(0,0,0,0.08), 8px 4px 24px rgba(0,0,0,0.05);
@@ -101,12 +108,12 @@
 .top-section {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
     margin-bottom: 18px;
 }
 
 .title {
-    font-size: 11px;
+    font-size: 15px;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #3275a8;
@@ -114,7 +121,7 @@
 }
 
 .form-headline {
-    font-size: 28px;        
+    font-size: 30px;        
     font-weight: 600;        
     color: #1a1a1a;
     line-height: 1.2;
@@ -124,7 +131,7 @@
 .existing-user {
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 15px;
     gap: 5px;
     color: #9e9b95;
     font-weight: 300;
@@ -139,7 +146,7 @@
 .registration-form {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 8px;
 }
 
 .form-row {
@@ -156,7 +163,7 @@
 }
 
 .form-group label {
-    font-size: 10px;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.8px;
     color: #9e9b95;
@@ -169,8 +176,8 @@
 .form-group input[type="password"] {
     border: 0.5px solid #dddbd6;
     border-radius: 8px;
-    padding: 8px 10px;
-    font-size: 14px;
+    padding: 10px 10px;
+    font-size: 15px;
     color: #1a1a1a;
     background: #fff;
     outline: none;
@@ -223,51 +230,15 @@
     border: none;
     border-radius: 8px;
     padding: 10px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     cursor: pointer;
     margin-bottom: 12px;
     letter-spacing: 0.2px;
 }
 
-.divider-or {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    color: #c5c3be;
-    margin-bottom: 14px;
-}
-
-.divider-or::before,
-.divider-or::after {
-    content: '';
-    flex: 1;
-    height: 0.5px;
-    background: #e2e0db;
-}
-
-.btn-google {
-    width: 100%;
-    background: #fff;
-    border: 0.5px solid #dddbd6;
-    border-radius: 8px;
-    padding: 10px;
-    font-size: 15px;
-    color: #5e5c58;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 16px;
-}
-
-.bottom-section {
-    margin-top: 8px;
-}
-
 .seller-panel {
-    font-size: 13px;
+    font-size: 14px;
     color: #9e9b95;
     font-weight: 300;
     text-align: center;
@@ -385,17 +356,37 @@
     }
 }
 
-.snack-success {
-    background-color: #4caf50 !important;
-    color: white !important;
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-.snack-error {
-    background-color: #f44336 !important;
-    color: white !important;
+.input-wrapper input {
+    width: 100%;
+    padding-right: 38px !important;
+    box-sizing: border-box;
 }
 
-.snack-success .mat-mdc-button,
-.snack-error .mat-mdc-button {
-    color: white !important;
+.eye-btn {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    color: #c5c3be;
+    transition: color 0.2s;
+}
+
+.eye-btn:hover {
+    color: #3275a8;
+}
+
+.eye-btn mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
 }
