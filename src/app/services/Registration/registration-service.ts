@@ -19,4 +19,8 @@ export class RegistrationService {
         return this.http.post(`${environment.apiUrl}/register/buyer_register`, payload);
     }
 
+    registerSeller(payload : FormData) : Observable<any>{
+        return this.http.post(`${environment.apiUrl}/register/seller_register`, payload);
+    }
+
 }
