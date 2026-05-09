@@ -1,1 +1,364 @@
-<p>seller-registration works!</p>
+<div class="seller-registration-container">
+    <div class="side-panel">
+        <div class="app-name">
+            {{appName}}
+        </div>
+        <div class="about">
+            <div>
+                Zero commission for first 3 months
+            </div>
+            <div>
+                Razorpay-powered instant payouts
+            </div>
+            <div>
+                Real-time order & inventory dashboard
+            </div>
+            <div>
+                Dedicated seller support team
+            </div>
+            <div>
+                Reach buyers across Tamil Nadu
+            </div>
+        </div>
+        <hr>
+        <div class="active-sellers">
+            <div>
+                Active Sellers
+            </div>
+            <div>
+                {{activeSellers}}
+            </div>
+            <div>
+                across Tamil Nadu
+            </div>
+        </div>
+    </div>
+    <div class="seller-registration-form">
+        <div class="form-card">
+            <div class="top-section">
+                <div class="title">
+                    Seller Registration
+                </div>
+                <div class="form-headline">
+                    Start Selling Today
+                </div>
+                <div class="existing-user">
+                    Already have an Account? 
+                    <span routerLink="/auth/login">
+                        Sign in...
+                    </span>
+                </div>
+            </div>
+            <form class="registration-form" [formGroup]="sellerFormBuilder" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first_name">First Name *</label>
+                        <input 
+                            type="text" 
+                            formControlName="first_name" 
+                            id="first_name" 
+                            placeholder="Enter your First Name"
+                            [class.input-error]="sellerFormBuilder.get('first_name')?.invalid && sellerFormBuilder.get('first_name')?.touched"
+                            (keydown)="blockSpace($event, 'first_name')"
+                            (input)="restrictionsOnInput('first_name')"
+                            maxlength="25"
+                            autocomplete="off"
+                        />
+                        @if(sellerFormBuilder.get('first_name')?.invalid && sellerFormBuilder.get('first_name')?.touched){
+                            <span class="error-msg">
+                                First Name is required
+                            </span>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name *</label>
+                        <input 
+                            type="text" 
+                            formControlName="last_name" 
+                            id="last_name" 
+                            placeholder="Enter your Last Name"
+                            [class.input-error]="sellerFormBuilder.get('last_name')?.invalid && sellerFormBuilder.get('last_name')?.touched"
+                            (keydown)="blockSpace($event, 'last_name')"
+                            (input)="restrictionsOnInput('last_name')"
+                            maxlength="25"
+                            autocomplete="off"
+                        />
+                        @if(sellerFormBuilder.get('last_name')?.invalid && sellerFormBuilder.get('last_name')?.touched){
+                            <span class="error-msg">
+                                Last Name is required
+                            </span>
+                        }
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email_id">Email Address *</label>
+                        <input 
+                            type="email" 
+                            formControlName="email_id" 
+                            id="email_id" 
+                            placeholder="Enter your Email Address"
+                            [class.input-error]="sellerFormBuilder.get('email_id')?.invalid && sellerFormBuilder.get('email_id')?.touched"
+                            (keydown)="blockSpace($event, 'email_id')"
+                            (input)="restrictionsOnInput('email_id')"
+                            autocomplete="off"
+                        />
+                        @if(sellerFormBuilder.get('email_id')?.invalid && sellerFormBuilder.get('email_id')?.touched){
+                            @if(sellerFormBuilder.get('email_id')?.hasError('email')){
+                                <span class="error-msg">
+                                    Email Address is required
+                                </span>
+                            }
+                            @if(sellerFormBuilder.get('email_id')?.hasError('required')){
+                                <span class="error-msg">
+                                    Invalid Email Format
+                                </span>
+                            }
+                        }
+                            
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile_number">Mobile Number *</label>
+                        <input 
+                            type="text" 
+                            formControlName="mobile_number" 
+                            maxlength="10"
+                            id="mobile_number" 
+                            placeholder="Enter your Mobile Number"
+                            [class.input-error]="sellerFormBuilder.get('mobile_number')?.invalid && sellerFormBuilder.get('mobile_number')?.touched"
+                            (keydown)="blockSpace($event, 'mobile_number')"
+                            (input)="restrictionsOnInput('mobile_number')"
+                            autocomplete="off"
+                        />
+                        @if(sellerFormBuilder.get('mobile_number')?.invalid && sellerFormBuilder.get('mobile_number')?.touched){
+                            @if(sellerFormBuilder.get('mobile_number')?.hasError('required')){
+                                <span class="error-msg">
+                                    Mobile Number is required
+                                </span>
+                            }
+                            @else if (sellerFormBuilder.get('mobile_number')?.hasError('pattern')) {
+                                <span class="error-msg">
+                                    Invalid Mobile Number
+                                </span>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="business_name">Business Name *</label>
+                        <input 
+                            type="text" 
+                            formControlName="business_name" 
+                            id="business_name" 
+                            placeholder="Enter your Business Name"
+                            [class.input-error]="sellerFormBuilder.get('business_name')?.invalid && sellerFormBuilder.get('business_name')?.touched"
+                            (keydown)="blockSpace($event, 'business_name')"
+                            (input)="restrictionsOnInput('business_name')"
+                            maxlength="60"
+                            autocomplete="off"
+                        />
+                        @if(sellerFormBuilder.get('business_name')?.invalid && sellerFormBuilder.get('business_name')?.touched){
+                            <span class="error-msg">
+                                Business Name is required
+                            </span>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="business_type">Business Type *</label>
+                        <select 
+                            formControlName="business_type" 
+                            id="business_type"
+                            [class.input-error]="sellerFormBuilder.get('business_type')?.invalid && sellerFormBuilder.get('business_type')?.touched"
+                        >
+                            <option value="" selected disabled>Select Business Type</option>
+                            @for(type of businessTypes; track type.id){
+                                <option [value]="type.id">
+                                    {{ type.business_type_name }}
+                                </option>
+                            }
+                        </select>
+                        @if(sellerFormBuilder.get('business_type')?.invalid && sellerFormBuilder.get('business_type')?.touched){
+                            <span class="error-msg">
+                                Business Type is required
+                            </span>
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="business_name">Business Address *</label>
+                    <textarea 
+                        formControlName="business_address"  
+                        id="business_address"
+                        [class.input-error]="sellerFormBuilder.get('business_address')?.invalid && sellerFormBuilder.get('business_address')?.touched"
+                        (keydown)="blockSpace($event, 'business_address')"
+                        (input)="restrictionsOnInput('business_address')"
+                        autocomplete="off"
+                    ></textarea>
+                    @if(sellerFormBuilder.get('business_address')?.invalid && sellerFormBuilder.get('business_address')?.touched){
+                        <span class="error-msg">
+                            Business Address is required
+                        </span>
+                    }
+                </div>
+                <div class="form-row form-row-3">
+                    <div class="form-group">
+                        <label for="state">State *</label>
+                        <select
+                            formControlName="state" 
+                            id="state"
+                            [class.input-error]="sellerFormBuilder.get('state')?.invalid && sellerFormBuilder.get('state')?.touched"
+                            (change)="getCities($event)"
+                        >
+                            <option value="" selected disabled>Select State</option>
+                            @for(state of states; track state.id){
+                                <option [value]="state.id">
+                                    {{state.state_name}}
+                                </option>
+                            }
+                        </select>
+                        @if(sellerFormBuilder.get('state')?.invalid && sellerFormBuilder.get('state')?.touched){
+                            <span class="error-msg">
+                                State is required
+                            </span>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City *</label>
+                        <select 
+                            formControlName="city" 
+                            id="city"
+                            [class.input-error]="sellerFormBuilder.get('city')?.invalid && sellerFormBuilder.get('city')?.touched"
+                        >
+                            <option value="" selected disabled>Select City</option>
+                            @for(city of cities; track city.id){
+                                <option [value]="city.id">
+                                    {{ city.city_name }}
+                                </option>
+                            }
+                        </select>
+                        @if(sellerFormBuilder.get('city')?.invalid && sellerFormBuilder.get('city')?.touched){
+                            <span class="error-msg">
+                                City is required
+                            </span>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pincode *</label>
+                        <input 
+                            type="text" 
+                            formControlName="pincode" 
+                            id="pincode" 
+                            placeholder="Enter Pincode"
+                            maxlength="6"
+                            [class.input-error]="sellerFormBuilder.get('pincode')?.invalid && sellerFormBuilder.get('pincode')?.touched"
+                            (keydown)="blockSpace($event, 'pincode')"
+                            (input)="restrictionsOnInput('pincode')"
+                            autocomplete="off"
+                        />
+                        @if(sellerFormBuilder.get('pincode')?.invalid && sellerFormBuilder.get('pincode')?.touched){
+                            @if(sellerFormBuilder.get('pincode')?.hasError('required')){
+                                <span class="error-msg">Pincode is required</span>
+                            }
+                            @if(sellerFormBuilder.get('pincode')?.hasError('pattern')){
+                                <span class="error-msg">Pincode must be exactly 6 characters long.</span>
+                            }
+                        }
+                    </div>  
+                </div>
+                 <div class="form-row">
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <div class="input-wrapper">
+                            <input 
+                                [type]="showPassword ? 'text' : 'password'" 
+                                formControlName="password" 
+                                id="password" 
+                                placeholder="Enter your Password"
+                                [class.input-error]="sellerFormBuilder.get('password')?.invalid && sellerFormBuilder.get('password')?.touched"
+                                (keydown)="blockSpace($event, 'password')"
+                                (input)="restrictionsOnInput('password')"
+                            />
+                            <button type="button" class="eye-btn" (click)="togglePassword()">
+                                <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                            </button>
+                        </div>
+                        @if(sellerFormBuilder.get('password')?.invalid && sellerFormBuilder.get('password')?.touched){
+                            @if(sellerFormBuilder.get('password')?.hasError('required')){
+                                <span class="error-msg">
+                                    Password is required
+                                </span>
+                            }
+                            @else if (sellerFormBuilder.get('password')?.hasError('minlength')) {
+                                <span class="error-msg">
+                                    Password must be atleast 10 characters long.
+                                </span>
+                            }
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password *</label>
+                        <div class="input-wrapper">
+                            <input 
+                                [type]="showConfirmPassword ? 'text' : 'password'" 
+                                formControlName="confirm_password" 
+                                id="confirm_password" 
+                                placeholder="Re-enter your Password"
+                                [class.input-error]="sellerFormBuilder.get('confirm_password')?.touched && (sellerFormBuilder.get('confirm_password')?.invalid || sellerFormBuilder.hasError('passwordMismatch'))"
+                                (keydown)="blockSpace($event, 'confirm_password')"
+                                (input)="restrictionsOnInput('confirm_password')"
+                            />
+                            <button type="button" class="eye-btn" (click)="toggleConfirmPassword()">
+                                <mat-icon>{{ showConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                            </button>
+                        </div>
+                        @if(sellerFormBuilder.get('confirm_password')?.touched){
+                            @if(sellerFormBuilder.get('confirm_password')?.invalid && sellerFormBuilder.get('confirm_password')?.hasError('required')){
+                                <span class="error-msg">
+                                    Confirm Password is required
+                                </span>
+                            }
+                            @if(sellerFormBuilder.get('confirm_password')?.hasError('passwordMissmatchValidator')){
+                                <span class="error-msg">
+                                    Passwords do not match.
+                                </span>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="form-check">
+                    <div class="checkbox-row">
+                        <input type="checkbox" id="terms_and_conditions" formControlName="terms_and_conditions">
+                        <label for="terms_and_conditions"> 
+                            I agree to the
+                            <span>Terms of Service</span> 
+                            and
+                            <span>Privacy Policy</span>
+                        </label>
+                    </div>
+                    @if(sellerFormBuilder.get('terms_and_conditions')?.invalid && sellerFormBuilder.get('terms_and_conditions')?.touched){
+                        <span class="error-msg">
+                            You must accept the terms to continue
+                        </span>
+                    }
+                </div>
+                <button type="submit" class="btn-submit">Create Account</button>
+            </form>
+            <div class="bottom-section">
+                <div class="buyer-panel">
+                    Want to became a Buyer? 
+                    <span routerLink="/auth/register-buyer">
+                        Click here...
+                    </span>
+                </div>
+                <div class="buyer-panel">
+                    Already a Buyer? 
+                    <span routerLink="/auth/login">
+                        Sign in
+                    </span> 
+                    to add a Seller role.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

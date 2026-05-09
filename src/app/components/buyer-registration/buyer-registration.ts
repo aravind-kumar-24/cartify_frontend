@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegistrationService } from '../../services/Registration/registration-service';
 import { ToasterService } from '../../services/Toaster/toaster-service';
+import { LoaderService } from '../../services/Loader/loader-service';
+import { InputValidationHelper } from '../../helpers/InputValidationHelper';
 
 @Component({
     selector: 'app-buyer-registration',
@@ -23,7 +25,9 @@ export class BuyerRegistration implements OnInit {
     constructor(
         private formBuilder : FormBuilder,
         private registrationService : RegistrationService,
-        private toaster : ToasterService
+        private toaster : ToasterService,
+        private loader : LoaderService,
+        private route : Router
     ){
 
     }
@@ -43,47 +47,18 @@ export class BuyerRegistration implements OnInit {
             'password' : ['', [Validators.required, Validators.minLength(10)]],
             'confirm_password' : ['', [Validators.required]],
             'terms_and_conditions' : [false, [Validators.requiredTrue]]
-        }, {validators : this.passwordMissmatchValidator})
-    }
-
-    passwordMissmatchValidator(form: FormGroup){
-        const password = form.get('password')?.value;
-        const confirmPassword = form.get('confirm_password')?.value;
-        return password === confirmPassword ? null : {passwordMismatch : true}
+        }, {validators : InputValidationHelper.passwordMissmatchValidator})
     }
 
     blockSpace(event: KeyboardEvent, field: string): void {
-        if (event.key !== ' ') return;
-
-        if (field === 'first_name' || field === 'last_name') {
-            const input = event.target as HTMLInputElement;
-            const cursorPos = input.selectionStart ?? 0;
-            const value = input.value;
-            if (cursorPos === 0 || value[cursorPos - 1] === ' ') {
-                event.preventDefault();
-            }
-        } else {
-            event.preventDefault();
-        }
+        InputValidationHelper.blockSpace(event, field);
     }
 
-    restrictionsOnInput(field: string){
+    restrictionsOnInput(field: string): void {
         const input = this.buyerFormBuilder.get(field);
-        if(!input) return;
-
-        let value = input.value;
-
-        if(field === 'first_name' || field === 'last_name'){
-            value = value.replace(/^\s+/, '');
-            value = value.replace(/\s{2,}/g, ' ')
-        }else if(field === 'email_id' || field === 'password' || field === 'confirm_password'){
-            value = value.replace(/\s/g, '');
-        }else if(field === 'mobile_number'){
-            value = value.replace(/\s/g, '');     
-            value = value.replace(/[^0-9]/g, '');
-        }
-
-        input.setValue(value, {emitEvent:false});
+        if (!input) return;
+        const cleaned = InputValidationHelper.restrictionsOnInput(input.value, field);
+        input.setValue(cleaned, { emitEvent: false });
     }
 
     togglePassword(){
@@ -108,16 +83,21 @@ export class BuyerRegistration implements OnInit {
             formData.append(key, value as string);
         })
 
+        this.loader.show();
+
         this.registrationService.registerBuyer(formData).subscribe({
             next : (response) => {
-                console.log(response);
                 this.toaster.success(response.message);
-                this.buyerFormBuilder.reset()
+                this.buyerFormBuilder.reset();
+                this.route.navigate(['/auth/login']);
             },
             error : (error) => {
-                console.log(error);
                 const message = error?.error?.message || 'Something went wrong!';
                 this.toaster.error(message);
+                this.loader.hide();
+            },
+            complete : () => {
+                this.loader.hide();
             }
         })
 

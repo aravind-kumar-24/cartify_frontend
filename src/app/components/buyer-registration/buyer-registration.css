@@ -237,6 +237,12 @@ html, body {
     letter-spacing: 0.2px;
 }
 
+.bottom-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
 .seller-panel {
     font-size: 14px;
     color: #9e9b95;
