@@ -1,0 +1,416 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    width: 60%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.side-panel {
+    background: #3275a8;
+    border-radius: 20px 0 0 20px;
+    padding: 38px;
+    width: 330px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: -4px 0 24px rgba(201, 61, 56, 0.25), 4px 0 24px rgba(0,0,0,0.08);
+}
+
+.app-name {
+    font-size: 28px;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 24px;
+}
+
+.about {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+}
+
+.about > div {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.4;
+    font-weight: 300;
+}
+
+.about>div::before {
+    content: '';
+    width: 6px;
+    min-width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    margin-top: 8px;
+}
+
+.side-panel hr {
+    border: none;
+    border-top: 0.5px solid #fff;
+    margin: 24px 0 18px;
+}
+
+.active-users>div:nth-child(1) {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.active-users>div:nth-child(2) {
+    font-size: 30px;
+    font-weight: 500;
+    color: #fff;
+    line-height: 1;
+}
+
+.active-users>div:nth-child(3) {
+    font-size: 12px;
+    color: #fff;
+    font-weight: 300;
+    margin-top: 4px;
+}
+
+.login-form-container {
+    flex: 1;
+    background: #faf9f8;
+    border-radius: 0 20px 20px 0;
+    border-left: 0.5px solid #e2e0db;
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+    padding: 35px 40px;  
+    box-shadow: 4px 0 32px rgba(0,0,0,0.08), 8px 4px 24px rgba(0,0,0,0.05);
+}
+
+.form-card {
+    width: 100%;
+    max-width: 450px;
+}
+
+.top-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.title {
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #3275a8;
+    font-weight: 600;
+}
+
+.form-headline {
+    font-size: 30px;        
+    font-weight: 600;        
+    color: #1a1a1a;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.new-user {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    gap: 5px;
+    color: #9e9b95;
+    font-weight: 300;
+}
+
+.new-user span{
+    color: #3275a8;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #9e9b95;
+    font-weight: 600;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    border: 0.5px solid #dddbd6;
+    border-radius: 8px;
+    padding: 10px 10px;
+    font-size: 15px;
+    color: #1a1a1a;
+    background: #fff;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.15s;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    border-color: #3275a8;
+}
+
+.form-group input::placeholder {
+    color: #c5c3be;
+}
+
+.role-toggle {
+    display: flex;
+    background: #eeece8;
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 24px;
+    gap: 4px;
+}
+
+.form-toggle {
+    display: flex;
+    width: 100%;
+    background: #eeece8;
+    border-radius: 10px;
+    padding: 4px;
+    gap: 4px;
+}
+
+.role-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+    color: #9e9b95;
+}
+
+.role-btn.active {
+    background: #3275a8;
+    color: #fff;
+}
+
+.btn-submit {
+    width: 100%;
+    background: #3275a8;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 12px;
+    letter-spacing: 0.2px;
+}
+
+.forgot-password {
+    text-align: right;
+    margin-top: -6px;
+    margin-bottom: 16px;
+}
+
+.forgot-password span {
+    font-size: 13px;
+    color: #3275a8;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Bottom links */
+.bottom-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.bottom-section div {
+    font-size: 14px;
+    color: #9e9b95;
+    font-weight: 300;
+    text-align: center;
+}
+
+.bottom-section span {
+    color: #3275a8;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+
+
+@media (max-width: 900px) {
+    .login-container {
+        width: 95%;
+        padding: 16px;
+    }
+
+    .side-panel {
+        width: 220px;
+        padding: 28px 20px;
+    }
+
+    .app-name {
+        font-size: 22px;
+        margin-bottom: 16px;
+    }
+
+    .about > div {
+        font-size: 13px;
+    }
+
+    .active-users > div:nth-child(2) {
+        font-size: 24px;
+    }
+
+    .login-form-container {
+        padding: 24px 20px;
+    }
+
+    .form-headline {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 600px) {
+    .login-container {
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        min-height: 100vh;
+        align-items: stretch;
+    }
+
+    .side-panel {
+        width: 100%;
+        border-radius: 0;
+        padding: 24px 20px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0;
+        box-shadow: none;
+        min-height: unset;
+    }
+
+    .app-name {
+        font-size: 22px;
+        margin-bottom: 0;
+        width: 100%;
+    }
+
+    .about {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+        flex: unset;
+        width: 100%;
+        margin: 12px 0;
+        justify-content: flex-start;
+    }
+
+    .about > div {
+        font-size: 12px;
+        width: auto;
+    }
+
+    .side-panel hr {
+        display: none;
+    }
+
+    .active-buyers {
+        display: none;
+    }
+
+    .login-form-container {
+        border-radius: 0;
+        border-left: none;
+        border-top: 0.5px solid #e2e0db;
+        padding: 24px 20px;
+        box-shadow: none;
+        align-items: flex-start;
+    }
+
+    .form-card {
+        max-width: 100%;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-headline {
+        font-size: 22px;
+    }
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding-right: 38px !important;
+    box-sizing: border-box;
+}
+
+.eye-btn {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    color: #c5c3be;
+    transition: color 0.2s;
+}
+
+.eye-btn:hover {
+    color: #3275a8;
+}
+
+.eye-btn mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}

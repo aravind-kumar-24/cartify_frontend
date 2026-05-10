@@ -1,1 +1,129 @@
-<p>login works!</p>
+<div style="height: 100%;display: flex; align-items: center;">
+    <div class="login-container">
+        <div class="side-panel">
+            <div class="app-name">
+                {{appName}}
+            </div>
+            <div class="about">
+                <div>
+                    Free to join, always
+                </div>
+                <div>
+                    Real-time Order tracking & wishlist
+                </div>
+                <div>
+                    Exclusive member deals
+                </div>
+                <div>
+                    Secure Razorpay checkout
+                </div>
+            </div>
+            <hr>
+            <div class="active-users">
+                <div>
+                    Active Users
+                </div>
+                <div>
+                    {{activeUsers}}
+                </div>
+                <div>
+                    across Tamil Nadu
+                </div>
+            </div>
+        </div>
+        <div class="login-form-container">
+            <div class="form-card">
+                <div class="top-section">
+                    <div class="title">
+                        Welcome Back
+                    </div>
+                    <div class="form-headline">
+                        Sign In
+                    </div>
+                    <div class="new-user">
+                        Don't have an Account?
+                        <span routerLink="/auth/register-buyer">
+                            Register here...
+                        </span>
+                    </div>
+                </div>
+                <form class="login-form" [formGroup]="loginFormBuilder" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <div class="form-toggle">
+                            <button
+                                type="button"
+                                class="role-btn"
+                                [class.active]="loginFormBuilder.get('user_type')?.value === 'Buyer'"
+                                (click)="setUserType('Buyer')"
+                            >
+                                Buyer
+                            </button>
+                            <button
+                                type="button"
+                                class="role-btn"
+                                [class.active]="loginFormBuilder.get('user_type')?.value === 'Seller'"
+                                (click)="setUserType('Seller')"
+                            >
+                                Seller
+                            </button>
+                        </div>
+                        @if(loginFormBuilder.get('user_type')?.invalid && loginFormBuilder.get('user_type')?.touched){
+                            <span class="error-msg">
+                                Please select a role to continue
+                            </span>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="email_id">Email Address *</label>
+                        <input 
+                            type="email" 
+                            formControlName="email_id" id="email_id" placeholder="Enter your Email Address"
+                            [class.input-error]="loginFormBuilder.get('email_id')?.invalid && loginFormBuilder.get('email_id')?.touched"
+                            (keydown)="blockSpace($event, 'email_id')" 
+                            (input)="restrictionsOnInput('email_id')"
+                            autocomplete="off" 
+                        />
+                        @if(loginFormBuilder.get('email_id')?.invalid && loginFormBuilder.get('email_id')?.touched){
+                            @if(loginFormBuilder.get('email_id')?.hasError('required')){
+                                <span class="error-msg">
+                                    Email Address is required
+                                </span>
+                            }
+                            @else if (loginFormBuilder.get('email_id')?.hasError('email')) {
+                                <span class="error-msg">
+                                    Invalid Email Format
+                                </span>
+                            }
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <div class="input-wrapper">
+                            <input 
+                                [type]="showPassword ? 'text' : 'password'" 
+                                formControlName="password" 
+                                id="password"
+                                placeholder="Enter your Password"
+                                [class.input-error]="loginFormBuilder.get('password')?.invalid && loginFormBuilder.get('password')?.touched"
+                                (keydown)="blockSpace($event, 'password')" 
+                                (input)="restrictionsOnInput('password')" 
+                            />
+                            <button type="button" class="eye-btn" (click)="togglePassword()">
+                                <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                            </button>
+                        </div>
+                        @if(loginFormBuilder.get('password')?.invalid && loginFormBuilder.get('password')?.touched){
+                            <span class="error-msg">
+                                Password is required
+                            </span>
+                        }
+                    </div>
+                    <div class="forgot-password">
+                        <span>Forgot Password?</span>
+                    </div>
+                    <button type="submit" class="btn-submit">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
