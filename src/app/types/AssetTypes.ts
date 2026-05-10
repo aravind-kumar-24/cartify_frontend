@@ -24,3 +24,11 @@ export type Cities = {
 export type CitiesResponse = {
     cities: Cities[]
 }
+
+export type userTypes = 'Buyer' | 'Seller';
+
+export type AuthenticatedResponse = {
+    access_token: string,
+    message: string,
+    token_type: string
+}
