@@ -1,24 +1,17 @@
-<mat-toolbar color="primary" class="toolbar">
-    <span class="logo">
-        Cartify.
-    </span>
-    <nav class="nav-links">
-        <button mat-button>New Arrivals</button>
-        <button mat-button>Electronics</button>
-        <button mat-button>Fashion</button>
-        <button mat-button>Home & Living</button>
-        <button mat-button>Deals</button>
-    </nav>
-    <div class="actions">
-        <button mat-icon-button>
-            <mat-icon>favorite_border</mat-icon>
-        </button>
-        <div [matBadge]="cartCount" matBadgeOverlap="false" class="demo-section">
-            <mat-icon>shopping_cart</mat-icon>
-        </div>
-        <div class="auth-actions">
-            <button mat-stroked-button routerLink="/auth/login">Login</button>
-            <button mat-raised-button routerLink="/auth/register-buyer">Register</button>
-        </div>
+<nav class="navbar">
+
+    <div class="logo">
+        Cartify
     </div>
-</mat-toolbar>
+
+    <div class="nav-right">
+
+        <button class="btn-login" routerLink="/auth/login">
+            Login
+        </button>
+
+        <button class="btn-register" routerLink="/auth/register-buyer">
+            Register
+        </button>
+    </div>
+</nav>

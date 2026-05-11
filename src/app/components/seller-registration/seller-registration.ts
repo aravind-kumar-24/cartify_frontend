@@ -42,11 +42,30 @@ export class SellerRegistration implements OnInit {
     ngOnInit(): void {
         this.appName = environment.appName;
 
+        this.activeSellersCount()
+
         this.sellerRegistrationForm();
 
         this.getBusinessTypes();
 
         this.getStates();
+    }
+
+    activeSellersCount(){
+        this.loader.show();
+        this.registrationService.getCount('seller').subscribe({
+            next : (response) => {
+                this.activeSellers = response.count;
+            }, 
+            error : (error) => {
+                this.loader.hide();
+                const message = error.error?.message || 'Failed to fetch the Sellers count!';
+                this.toaster.error(message)
+            }, 
+            complete : () => {
+                this.loader.hide();
+            }
+        })
     }
 
     sellerRegistrationForm() {

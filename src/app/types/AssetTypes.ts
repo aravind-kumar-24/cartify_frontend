@@ -30,5 +30,11 @@ export type userTypes = 'Buyer' | 'Seller';
 export type AuthenticatedResponse = {
     access_token: string,
     message: string,
-    token_type: string
+    token_type: string,
+    role : string
+}
+
+export type CountResponse = {
+    count : number;
+    message : string;
 }
