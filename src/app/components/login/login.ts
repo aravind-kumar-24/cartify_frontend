@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { userTypes } from '../../types/AssetTypes';
 import { AuthService } from '../../services/Auth/auth-service';
+import { RegistrationService } from '../../services/Registration/registration-service';
 
 @Component({
     selector: 'app-login',
@@ -28,7 +29,8 @@ export class Login implements OnInit {
         private formBuilder: FormBuilder,
         private loader: LoaderService,
         private toaster: ToasterService,
-        private auth : AuthService
+        private auth : AuthService,
+        private registerService : RegistrationService
     ) {
 
     }
@@ -36,7 +38,26 @@ export class Login implements OnInit {
     ngOnInit(): void {
         this.appName = environment.appName;
 
+        this.activeUsersCount();
+
         this.loginForm();
+    }
+
+    activeUsersCount(){
+        this.loader.show();
+        this.registerService.getCount('all').subscribe({
+            next : (response) => {
+                this.activeUsers = response.count;
+            }, 
+            error : (error) => {
+                this.loader.hide();
+                const message = error.error?.message || 'Failed to fetch the count!';
+                this.toaster.error(message)
+            }, 
+            complete : () => {
+                this.loader.hide();
+            }
+        })
     }
 
     loginForm() {

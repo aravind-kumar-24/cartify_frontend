@@ -1,29 +1,63 @@
-.toolbar {
+* {
+    box-sizing: border-box;
+}
+
+.navbar {
+    background: #ffffff;
+    padding: 12px 30px;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    border-bottom: 1px solid #ececec;
 }
 
 .logo {
-    font-size: 35px;
-    font-weight: bold;
+    font-size: 40px;
+    font-weight: 600;
+    color: #3275a8;
 }
 
-.nav-links {
-    display: flex;
-    gap: 25px;
-}
-
-.nav-links button {
-    font-size: 20px;
-}
-
-.actions {
+.nav-right {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 15px;
 }
 
-.auth-actions {
-    display: flex;
-    gap: 10px;
+.btn-login,
+.btn-register {
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-login {
+    background: white;
+    color: #3275a8;
+    border: 1.5px solid #3275a8;
+}
+
+.btn-login:hover {
+    background: #f3f8fc;
+}
+
+.btn-register {
+    background: #3275a8;
+    color: white;
+    border: 1.5px solid #3275a8;
+}
+
+.btn-register:hover {
+    opacity: 0.92;
+}
+
+
+@media (max-width: 992px) {
+
+    .navbar {
+        flex-wrap: wrap;
+    }
+
 }

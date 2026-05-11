@@ -35,7 +35,26 @@ export class BuyerRegistration implements OnInit {
     ngOnInit(): void {
         this.appName = environment.appName;
 
+        this.activeBuyersCount();
+
         this.buyerRegistrationForm();
+    }
+
+    activeBuyersCount(){
+        this.loader.show();
+        this.registrationService.getCount('buyer').subscribe({
+            next : (response) => {
+                this.activeBuyers = response.count;
+            }, 
+            error : (error) => {
+                this.loader.hide();
+                const message = error.error?.message || 'Failed to fetch the Buyers count!';
+                this.toaster.error(message)
+            }, 
+            complete : () => {
+                this.loader.hide();
+            }
+        })
     }
 
     buyerRegistrationForm(){

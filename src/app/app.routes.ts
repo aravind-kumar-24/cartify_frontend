@@ -6,15 +6,9 @@ import { Login } from './components/login/login';
 import { SellerRegistration } from './components/seller-registration/seller-registration';
 import { BuyerRegistration } from './components/buyer-registration/buyer-registration';
 
-export const routes: Routes = [
-    {
-        path: '',
-        component: BuyerLayout,
-        children: [
-            { path: '', component: Home }
-        ]
-    },
-
+export const routes: Routes = [    
+    
+    { path: '', component: Home },
     {
         path: 'auth',
         component: AuthLayout,
@@ -23,5 +17,14 @@ export const routes: Routes = [
             { path: 'register-seller', component: SellerRegistration },
             { path: 'register-buyer', component: BuyerRegistration }
         ]
-    }
+    },
+    
+    // {
+    //     path: '',
+    //     component: BuyerLayout,
+    //     children: [
+    //         { path: '', component: Home }
+    //     ]
+    // },
+    
 ];
