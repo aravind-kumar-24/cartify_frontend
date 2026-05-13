@@ -38,3 +38,39 @@ export type CountResponse = {
     count : number;
     message : string;
 }
+
+export type featuresType = {
+    id : number,
+    icon : string,
+    title : string,
+    subTitle : string
+}
+
+export type categoriesType = {
+    id : number;
+    icon : string,
+    category : string,
+    hot : boolean
+}
+
+export type bannerType = {
+    id : number;
+    icon : string,
+    bannerEyebrow : string,
+    bannerHeading : string,
+    bannerSubject : string,
+    bannerLinkSubject : string,
+    bannerRoute : string,
+    type : string
+}
+
+export type cardType = {
+    id : number,
+    icon : string,
+    cardLabel : string,
+    cardHeading : string,
+    cardSubject : string,
+    cardButton : string,
+    cardRoute : string,
+    cardType : string
+}

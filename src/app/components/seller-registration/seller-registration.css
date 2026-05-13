@@ -113,6 +113,36 @@ body {
     margin-bottom: 18px;
 }
 
+.title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+    color: #3275a8;
+    transition: background 0.2s, color 0.2s;
+    line-height: 1;
+}
+
+.back-btn:hover {
+    background: #e8f0f7;
+}
+
+.back-btn mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
 .title {
     font-size: 15px;
     text-transform: uppercase;
