@@ -1,7 +1,161 @@
 <app-header></app-header>
 
-<div>
-    Hi
+<section class="hero">
+    <div class="hero__content">
+        <span class="hero__eyebrow">Tamil Nadu's own marketplace</span>
+        <h1 class="hero__heading">
+            Shop local.<br />
+            Ship fast.<br />
+            Save more.
+        </h1>
+        <p class="hero__sub">
+            Thousands of verified sellers. Real-time order tracking.
+            Secure Razorpay checkout.
+        </p>
+        <div class="hero__actions">
+            <a class="btn btn--white" routerLink="/auth/register-buyer">Create free account</a>
+            <a class="btn btn--outline-white" routerLink="/auth/login">Sign in</a>
+        </div>
+    </div>
+
+    <div class="hero__features">
+        @for(feature of features; track feature.id ){
+            <div class="feature-tile">
+                <mat-icon class="feature-tile__icon">{{ feature.icon }}</mat-icon>
+                <span class="feature-tile__title">{{ feature.title }}</span>
+                <span class="feature-tile__sub">{{ feature.subTitle }}</span>
+            </div>
+        }
+    </div>
+</section>
+
+<div class="page-2">
+
+    <section class="category-bar">
+        <span class="category-bar__label">Browse by:</span>
+        <div class="category-bar__pills">
+            @for(category of categories; track category.id){
+                <a class="pill">
+                    <mat-icon class="pill__icon">{{ category.icon }}</mat-icon>
+                    {{ category.category }}
+                    @if(category.hot){
+                        <span class="pill__badge">Hot</span>
+                    }
+                </a>
+            }
+        </div>
+    </section>
+
+    <div class="banners">
+
+        @for(banner of banners; track banner.id){
+            <div class="banner" [ngClass]="banner.type == 'login' ? 'banner--amber' : 'banner--blue'">
+                <div class="banner__icon-wrap" [ngClass]="banner.type == 'login' ? 'banner__icon-wrap--amber' : 'banner__icon-wrap--blue'">
+                    <mat-icon class="banner__icon">{{ banner.icon }}</mat-icon>
+                </div>
+                <div class="banner__body">
+                    <p class="banner__eyebrow">{{ banner.bannerEyebrow }}</p>
+                    <p class="banner__heading">{{ banner.bannerHeading }}</p>
+                    <p class="banner__sub">{{ banner.bannerSubject }}</p>
+                </div>
+                <a class="btn" [ngClass]="banner.type == 'login' ? 'btn--amber' : 'btn--blue'" routerLink="{{banner.bannerRoute}}">{{ banner.bannerLinkSubject }}</a>
+            </div>
+        }
+    </div>
+
+    <div class="card-grid">
+        @for(card of cards; track card.id){
+            <div class="cat-card" [ngClass]="card.cardType == 'seller' ? 'cat-card--dark' : ''">
+                <div class="cat-card__header">
+                    <div 
+                        class="cat-card__icon-wrap"
+                        [ngClass]="
+                            card.cardType == 'electronics'
+                                ? 'cat-card__icon-wrap--electronics'
+                                : card.cardType == 'fashion'
+                                    ? 'cat-card__icon-wrap--fashion'
+                                    : card.cardType == 'home'
+                                        ? 'cat-card__icon-wrap--home'
+                                        : card.cardType == 'seller'
+                                            ? 'cat-card__icon-wrap--dark'
+                                            : ''
+                        "
+                    >
+                        <mat-icon 
+                            class="cat-card__icon"
+                            [ngClass]="
+                                card.cardType == 'electronics'
+                                ? 'cat-card__icon--electronics'
+                                : card.cardType == 'fashion'
+                                    ? 'cat-card__icon--fashion'
+                                    : card.cardType == 'home'
+                                        ? 'cat-card__icon--home'
+                                        : card.cardType == 'seller'
+                                            ? 'cat-card__icon--light'
+                                            : ''
+                            "
+                        >
+                            {{ card.icon }}
+                        </mat-icon>
+                    </div>
+                    <div>
+                        <p 
+                            class="cat-card__label"
+                            [ngClass]="
+                                card.cardType == 'electronics'
+                                ? 'cat-card__label--electronics'
+                                : card.cardType == 'fashion'
+                                    ? 'cat-card__label--fashion'
+                                    : card.cardType == 'home'
+                                        ? 'cat-card__label--home'
+                                        : card.cardType == 'seller'
+                                            ? 'cat-card__label--light'
+                                            : ''
+                            "
+                        >
+                            {{ card.cardLabel }}
+                        </p>
+                        <p class="cat-card__heading" [ngClass]="card.cardType == 'seller' ? 'cat-card__heading--light' : ''">{{ card.cardHeading }}</p>
+                    </div>
+                </div>
+                <p class="cat-card__sub" [ngClass]="card.cardType == 'seller' ? 'cat-card__sub--light' : ''">{{ card.cardSubject }}</p>
+                <a 
+                    class="btn"
+                    [ngClass]="
+                        card.cardType == 'electronics'
+                        ? 'btn--electronics'
+                        : card.cardType == 'fashion'
+                            ? 'btn--fashion'
+                            : card.cardType == 'home'
+                                ? 'btn--home'
+                                : card.cardType == 'seller'
+                                    ? 'btn--white-solid'
+                                    : ''
+                    "
+                    routerLink="{{card.cardRoute}}"
+                > 
+                    {{ card.cardButton }}
+                </a>
+            </div>
+        }
+    </div>
+
+</div>
+
+<div class="login-gate">
+    <div class="login-gate__icon">
+        <mat-icon class="login-gate__icon-symbol">lock</mat-icon>
+    </div>
+    <h2 class="login-gate__heading">Login to browse products</h2>
+    <p class="login-gate__sub">
+        Create a free Cartify account or sign in to explore thousands of products
+        from verified sellers across Tamil Nadu.
+    </p>
+    <div class="login-gate__actions">
+        <a class="btn btn--outline-blue" routerLink="/auth/login">Sign in</a>
+        <a class="btn btn--blue-solid" routerLink="/auth/register-buyer">Create free account</a>
+    </div>
+    <p class="login-gate__note">Free to join · No credit card needed · Real-time order tracking</p>
 </div>
 
 <app-footer></app-footer>
