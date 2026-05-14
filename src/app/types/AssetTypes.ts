@@ -74,3 +74,17 @@ export type cardType = {
     cardRoute : string,
     cardType : string
 }
+
+export type sellerOptionsType = {
+    id : number,
+    label : string,
+    icon : string,
+    route : string
+};
+
+export type buyerOptionsType = {
+    id : number,
+    label : string,
+    icon : string,
+    route : string
+};
