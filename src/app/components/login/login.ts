@@ -6,7 +6,7 @@ import { LoaderService } from '../../services/Loader/loader-service';
 import { ToasterService } from '../../services/Toaster/toaster-service';
 import { InputValidationHelper } from '../../helpers/InputValidationHelper';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { userTypes } from '../../types/AssetTypes';
 import { AuthService } from '../../services/Auth/auth-service';
 import { RegistrationService } from '../../services/Registration/registration-service';
@@ -30,7 +30,8 @@ export class Login implements OnInit {
         private loader: LoaderService,
         private toaster: ToasterService,
         private auth : AuthService,
-        private registerService : RegistrationService
+        private registerService : RegistrationService,
+        private router : Router
     ) {
 
     }
@@ -113,7 +114,16 @@ export class Login implements OnInit {
             next : (response) => {
                 this.loginFormBuilder.reset();
                 localStorage.setItem('token', response.access_token);
+                localStorage.setItem('role', response.role);
                 this.toaster.success(response.message);
+
+                const role = response.role;
+
+                if(role == 'Buyer'){
+                    this.router.navigate(['/buyer/buyer-dashboard']);
+                }else if(role == 'Seller'){
+                    this.router.navigate(['/seller/seller-dashboard']);
+                }
             },
             error : (error) => {
                 this.loader.hide();

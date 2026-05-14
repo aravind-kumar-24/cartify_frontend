@@ -1,0 +1,113 @@
+.sidebar {
+    height: 100%;
+    width: 240px;
+    background: #ffffff;
+    color: #3275a8;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    flex-shrink: 0;
+    border-right: 1px solid #ececec;
+}
+
+.sidebar.collapsed {
+    width: 64px;
+}
+
+.brand-icon {
+    color: #3275a8;
+}
+
+.sidebar-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 8px;
+    gap: 4px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #5a8ab0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+}
+
+.nav-item:hover {
+    background: #f3f8fc;
+    color: #3275a8;
+}
+
+.nav-item.active {
+    background: #3275a8;
+    color: #ffffff;
+}
+
+.nav-item.active mat-icon {
+    color: #ffffff;
+}
+
+.sidebar-footer {
+    padding: 8px;
+    border-top: 1px solid #ececec;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.logout-btn {
+    color: #e05c5c;
+}
+
+.logout-btn:hover {
+    background: #fdf0f0;
+    color: #e05c5c;
+}
+
+.toggle-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: #a0b8cc;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.toggle-btn:hover {
+    background: #f3f8fc;
+    color: #3275a8;
+}
+
+/* Hide label text when collapsed */
+.sidebar.collapsed .nav-label {
+    display: none;
+}
+
+/* Center icons when collapsed */
+.sidebar.collapsed .nav-item {
+    justify-content: center;
+    gap: 0;
+    padding: 10px;
+}
+
+/* Hide logout text when collapsed */
+.sidebar.collapsed .logout-btn .nav-label {
+    display: none;
+}

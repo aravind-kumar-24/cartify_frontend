@@ -1,0 +1,38 @@
+<aside class="sidebar" [class.collapsed]="isCollapsed">
+
+    <nav class="sidebar-nav">
+        @for(options of navbarOptions; track options.id){
+            <a
+                [routerLink]="options.route"
+                class="nav-item"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact : true}"
+                [matTooltip]="isCollapsed ? options.label : ''"
+                matTooltipPosition="right"
+            >
+                <mat-icon>{{options.icon}}</mat-icon>
+                <span class="nav-label">{{ options.label }}</span>
+            </a>
+        }
+    </nav>
+
+    <div class="sidebar-footer">
+        <button
+            class="nav-item logout-btn"
+            (click)="logout()"
+            [matTooltip]="isCollapsed ? 'Logout' : ''"
+            matTooltipPosition="right">
+            <mat-icon>logout</mat-icon>
+            <span class="nav-label">Logout</span>
+        </button>
+
+        <button
+            class="toggle-btn"
+            (click)="toggleSideBar()"
+            [matTooltip]="isCollapsed ? 'Expand' : 'Collapse'"
+            matTooltipPosition="right">
+            <mat-icon>{{ isCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+        </button>
+    </div>
+
+</aside>
