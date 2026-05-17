@@ -31,7 +31,8 @@ export type AuthenticatedResponse = {
     access_token: string,
     message: string,
     token_type: string,
-    role : string
+    role : string,
+    encrypted_role : string,
 }
 
 export type CountResponse = {
@@ -88,3 +89,8 @@ export type buyerOptionsType = {
     icon : string,
     route : string
 };
+
+export type UserDetailsResponse = {
+    message: string,
+    user_data : any[]
+}
