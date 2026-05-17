@@ -115,6 +115,7 @@ export class Login implements OnInit {
                 this.loginFormBuilder.reset();
                 localStorage.setItem('token', response.access_token);
                 localStorage.setItem('role', response.role);
+                localStorage.setItem('encrypted_role', response.encrypted_role);
                 this.toaster.success(response.message);
 
                 const role = response.role;

@@ -130,7 +130,7 @@
 .layout-body {
     display: flex;
     flex: 1;
-    height: calc(100vh - 67px - 49px); /* subtract header + footer height */
+    height: calc(100vh - 67px - 49px);
     overflow: hidden;
 }
 
